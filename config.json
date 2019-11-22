@@ -1,0 +1,8 @@
+{
+        "apikey": "XXX",
+        "database": "webrisk_db",
+        "urls": [
+                "www.site.gr",
+                "badbadsite.com"
+        ]
+}
