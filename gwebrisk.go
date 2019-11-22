@@ -61,6 +61,7 @@ type Config struct {
 
 var (
     configFlag = flag.String("config", "/etc/gwebrisk/config.json", "`FILE` to load config from")
+    debugFlag  = flag.Bool("debug", false, "print debug messages to stderr")
     cfg Config
 )
 
@@ -88,15 +89,17 @@ func main() {
         fmt.Fprintln(os.Stderr, "No -config specified")
         os.Exit(codeInvalid)
     }
-
     cfg, err := ParseConfig(*configFlag)
 
-    sb, err := webrisk.NewWebriskClient(webrisk.Config{
-        APIKey:    cfg.APIKey,
-        DBPath:    cfg.Database,
-        Logger:    os.Stderr,
-        ServerURL: DefaultServerURL,
-    })
+    var clientcfg webrisk.Config
+    clientcfg.APIKey = cfg.APIKey
+    clientcfg.DBPath = cfg.Database
+
+    if *debugFlag == true {
+        clientcfg.Logger = os.Stderr
+    }
+
+    sb, err := webrisk.NewWebriskClient(clientcfg)
     if err != nil {
         fmt.Fprintln(os.Stderr, "Unable to initialize Web Risk client: ", err)
         os.Exit(codeInvalid)
