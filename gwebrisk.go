@@ -49,7 +49,6 @@ const (
 // Default WebriskClient parameters
 const (
     DefaultServerURL = "webrisk.googleapis.com"
-    DefaultProxyURL = ""
 )
 
 // Config holds .json configuration
@@ -97,7 +96,6 @@ func main() {
         DBPath:    cfg.Database,
         Logger:    os.Stderr,
         ServerURL: DefaultServerURL,
-        ProxyURL:  DefaultProxyURL,
     })
     if err != nil {
         fmt.Fprintln(os.Stderr, "Unable to initialize Web Risk client: ", err)
