@@ -46,11 +46,6 @@ const (
     codeInvalid
 )
 
-// Default WebriskClient parameters
-const (
-    DefaultServerURL = "webrisk.googleapis.com"
-)
-
 // Config holds .json configuration
 type Config struct {
     APIKey   string `json:"apikey"`
